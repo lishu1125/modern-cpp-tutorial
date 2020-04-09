@@ -153,7 +153,7 @@ constexpr int fibonacci(const int n) {
 
 ### if/switch 变量声明强化
 
-在传统 C++ 中，变量的声明在虽然能够位于任何位置，甚至于 `for` 语句内能够声明一个临时变量 `int`，但始终没有办法在 `if` 和 `switch` 语句中声明一个临时的变量。例如：
+在传统 C++ 中，变量的声明虽然能够位于任何位置，甚至于 `for` 语句内能够声明一个临时变量 `int`，但始终没有办法在 `if` 和 `switch` 语句中声明一个临时的变量。例如：
 
 ```cpp
 #include <iostream>
@@ -232,6 +232,7 @@ int main() {
 
 ```cpp
 #include <initializer_list>
+#include <vector>
 class MagicFoo {
 public:
     std::vector<int> vec;
@@ -277,6 +278,7 @@ C++17 完善了这一设定，给出的结构化绑定可以让我们写出这�
 
 ```cpp
 #include <iostream>
+#include <tuple>
 
 std::tuple<int, double, std::string> f() {
     return std::make_tuple(1, 2.3, "456");
@@ -573,7 +575,7 @@ extern template class std::vector<double>; // 不在该当前编译文件中实�
 std::vector<std::vector<int>> matrix;
 ```
 
-这在传统C++编译器下是不能够被编译的，而 C++11 开始，连续的右尖括号将变得合法，并且能够顺利通过编译。甚至于下下面这种写法都能够通过编译：
+这在传统C++编译器下是不能够被编译的，而 C++11 开始，连续的右尖括号将变得合法，并且能够顺利通过编译。甚至于像下面这种写法都能够通过编译：
 
 ```cpp
 template<bool T>
@@ -823,6 +825,7 @@ int main() {
 C++11 引入了委托构造的概念，这使得构造函数可以在同一个类中一个构造函数调用另一个构造函数，从而达到简化代码的目的：
 
 ```cpp
+#include <iostream>
 class Base {
 public:
     int value1;
@@ -847,6 +850,7 @@ int main() {
 在传统 C++ 中，构造函数如果需要继承是需要将参数一一传递的，这将导致效率低下。C++11 利用关键字 using 引入了继承构造函数的概念：
 
 ```cpp
+#include <iostream>
 class Base {
 public:
     int value1;

@@ -23,9 +23,10 @@ InstalledDir: /Library/Developer/CommandLineTools/usr/bin
 
 Before learning modern C++, let's take a look at the main features that have been deprecated since C++11:
 
-> **Note**: Deprecation is not completely unusable, it is only intended to imply that programmers will disappear from future standards and should be avoided. However, the deprecated features are still part of the standard library, and most of the features are actually "permanently" reserved for compatibility reasons.
+> **Note**: Deprecation is not completely unusable, it is only intended to imply that features will disappear from future standards and should be avoided. However, the deprecated features are still part of the standard library, and most of the features are actually "permanently" reserved for compatibility reasons.
 
 - **The string literal constant is no longer allowed to be assigned to a `char *`. If you need to assign and initialize a `char *` with a string literal constant, you should use `const char *` or `auto`.**
+
     ```cpp
     char *str = "hello world!"; // A deprecation warning will appear
     ```
@@ -115,6 +116,7 @@ LDFLAGS_COMMON = -std=c++2a
 all:
 	$(C) -c $(SOURCE_C)
 	$(CXX) $(SOURCE_CXX) $(OBJECTS_C) $(LDFLAGS_COMMON) -o $(TARGET)
+
 clean:
 	rm -rf *.o $(TARGET)
 ```
@@ -138,7 +140,7 @@ Don't worry at the moment, we will come to meet them in our later chapters.
 ## Further Readings
 
 - [A Tour of C++ (2nd Edition) Bjarne Stroustrup](https://www.amazon.com/dp/0134997832/ref=cm_sw_em_r_mt_dp_U_GogjDbHE2H53B)
-- [C++ History](http://en.cppreference.com/w/cpp/language/history)
+  [History of C++](http://en.cppreference.com/w/cpp/language/history)
 - [C++ compiler support](https://en.cppreference.com/w/cpp/compiler_support)
 - [Incompatibilities Between ISO C and ISO C++](http://david.tribble.com/text/cdiffs.htm#C99-vs-CPP98)
 

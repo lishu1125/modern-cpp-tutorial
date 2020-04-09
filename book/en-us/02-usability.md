@@ -61,7 +61,7 @@ int main() {
         std::cout << "NULL == nullptr" << std::endl;
 
     foo(0);          // will call foo(int)
-    // foo(NULL);    // doen't compile
+    // foo(NULL);    // doesn't compile
     foo(nullptr);    // will call foo(char*)
     return 0;
 }
@@ -143,7 +143,7 @@ In the above example, `char arr_4[len_2]` may be confusing because `len_2` has b
 Why is `char arr_4[len_2]` still illegal? 
 This is because the length of the array in the C++ standard must be a constant expression, 
 and for `len_2`, this is a `const` constant, not a constant expression, 
-so even if this behavior is in most compilers Both support, but) it is an illegal behavior, 
+so even if this behavior is supported by most compilers, but it is an illegal behavior, 
 we need to use the `constexpr` feature introduced in C++11, which will be introduced next, 
 to solve this problem; for `arr_5`, before C++98 The compiler cannot know that `len_foo()` 
 actually returns a constant at runtime, which causes illegal production.
@@ -155,7 +155,7 @@ actually returns a constant at runtime, which causes illegal production.
 C++11 provides `constexpr` to let the user explicitly declare that the function or 
 object constructor will become a constant expression at compile time. 
 This keyword explicitly tells the compiler that it should verify that `len_foo` 
-should be a compile time. Constant expression.
+should be a compile time constant expression. Constant expression.
 
 In addition, the function of `constexpr` can use recursion:
 
@@ -222,8 +222,8 @@ int main() {
 ```
 
 In the above code, we can see that the `itr` variable is defined in the scope of 
-the entire `main()`, which causes us to rename the other when we need to traverse 
-the entire `std::vectors` again. A variable. C++17 eliminates this limitation so that 
+the entire `main()`, which causes us to rename the other when a variable need to traverse 
+the entire `std::vectors` again. C++17 eliminates this limitation so that 
 we can do this in if(or switch):
 
 ```cpp
@@ -280,12 +280,13 @@ To solve this problem,
 C++11 first binds the concept of the initialization list to the type 
 and calls it `std::initializer_list`, 
 allowing the constructor or other function to use the initialization list 
-like a parameter, which is The initialization of class objects provides 
+like a parameter, which is the initialization of class objects provides 
 a unified bridge between normal arrays and POD initialization methods, 
 such as:
 
 ```cpp
 #include <initializer_list>
+#include <vector>
 class MagicFoo {
 public:
     std::vector<int> vec;
@@ -342,6 +343,7 @@ and the structured bindings let us write code like this:
 
 ```cpp
 #include <iostream>
+#include <tuple>
 
 std::tuple<int, double, std::string> f() {
     return std::make_tuple(1, 2.3, "456");
@@ -776,6 +778,7 @@ how to unpack the parameters?
 First, we can use `sizeof...` to calculate the number of arguments:
 
 ```cpp
+#include <iostream>
 template<typename... Ts>
 void magic(Ts... args) {
     std::cout << sizeof...(args) << std::endl;
@@ -919,6 +922,7 @@ C++11 introduces the concept of a delegate construct, which allows a constructor
 in a constructor in the same class, thus simplifying the code:
 
 ```cpp
+#include <iostream>
 class Base {
 public:
     int value1;
@@ -943,6 +947,7 @@ int main() {
 In traditional C++, constructors need to pass arguments one by one if they need inheritance, which leads to inefficiency. C++11 introduces the concept of inheritance constructors using the keyword using:
 
 ```cpp
+#include <iostream>
 class Base {
 public:
     int value1;
@@ -956,7 +961,7 @@ public:
 };
 class Subclass : public Base {
 public:
-    using Base::Base; // inhereit constructor
+    using Base::Base; // inheritance constructor
 };
 int main() {
     Subclass s(3);
@@ -1091,6 +1096,10 @@ This section introduces the enhancements to language usability in modern C++, wh
 1. Using structured binding, implement the following functions with just one line of function code:
 
    ```cpp
+   #include <string>
+   #include <map>
+   #include <iostream>
+   
    template <typename Key, typename Value, typename F>
    void update(std::map<Key, Value>& m, F foo) {
        // TODO:

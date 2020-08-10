@@ -87,9 +87,8 @@ So, develop the habit of using `nullptr` directly.
 In addition, in the above code, we used `decltype` and 
 `std::is_same` which are modern C++ syntax. 
 In simple terms, `decltype` is used for type derivation, 
-and `std::is_same` is used. 
-To compare the equality of the two types, 
-we will discuss them in detail later in the [decltype](#decltype) section.
+and `std::is_same` is used to compare the equality of the two types. 
+We will discuss them in detail later in the [decltype](#decltype) section.
 
 ### constexpr
 
@@ -427,16 +426,16 @@ auto arr = new auto(10); // arr as int *
 > In addition, `auto` cannot be used to derive array types:
 > 
 > ```cpp
-> auto auto_arr2[10] = arr;   // illegal, can't infer array type
+> auto auto_arr2[10] = {arr};   // illegal, can't infer array type
 >
 > 2.6.auto.cpp:30:19: error: 'auto_arr2' declared as array of 'auto'
->     auto auto_arr2[10] = arr;
+>     auto auto_arr2[10] = {arr};
 > ```
 
 ### decltype
 
 The `decltype` keyword is used to solve the defect that the auto keyword 
-can only type the variable. Its usage is very similar to `sizeof`:
+can only type the variable. Its usage is very similar to `typeof`:
 
 
 ```cpp
@@ -874,7 +873,7 @@ What we mainly mentioned above is a form of template parameters: type template p
 
 ```cpp
 template <typename T, typename U>
-    auto add(T t, U u) {
+auto add(T t, U u) {
     return t+u;
 }
 ```

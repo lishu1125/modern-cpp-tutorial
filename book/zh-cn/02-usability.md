@@ -361,15 +361,15 @@ auto arr = new auto(10); // arr 被推导为 int *
 > 此外，`auto` 还不能用于推导数组类型：
 >
 > ```cpp
-> auto auto_arr2[10] = arr;   // 错误,  无法推导数组元素类型
+> auto auto_arr2[10] = {arr};   // 错误,  无法推导数组元素类型
 >
 > 2.6.auto.cpp:30:19: error: 'auto_arr2' declared as array of 'auto'
->     auto auto_arr2[10] = arr;
+>     auto auto_arr2[10] = {arr};
 > ```
 
 ### decltype
 
-`decltype` 关键字是为了解决 auto 关键字只能对变量进行类型推导的缺陷而出现的。它的用法和 `sizeof` 很相似：
+`decltype` 关键字是为了解决 auto 关键字只能对变量进行类型推导的缺陷而出现的。它的用法和 `typeof` 很相似：
 
 ```cpp
 decltype(表达式)
@@ -779,7 +779,7 @@ int main() {
 
 ```cpp
 template <typename T, typename U>
-    auto add(T t, U u) {
+auto add(T t, U u) {
     return t+u;
 }
 ```
